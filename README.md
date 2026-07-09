@@ -25,7 +25,9 @@ Some prompts to answer:
 
   In the design of my system, I have Categorical features and Numerical features. The Categorical features are used to award match bonuses for genre and mood, while the Numerical features (energy, tempo_bpm, valence, danceability, and acousticness) are used to score how close a song is to the user's target values. Every song is scored this way and then ranked highest to lowest. Each `UserProfile` stores what genre, mood, energy level, etc. that specific user typically likes, and every song is compared directly against that one profile's stated preferences. This is a **content-based filtering** approach — it recommends songs based on their own features matching what the user says they like, not based on what other similar users enjoyed.
 
-  **Possible future extension (not implemented here):** a *collaborative filtering* approach, where instead of comparing songs to one profile's preferences, the system would compare multiple profiles to each other, find users with similar taste, and recommend songs that those similar users liked. This would require storing multiple `UserProfile`s with real preference/listening data and a similarity metric between profiles, which is a separate system from the one built here.
+  The system will skew toward "more of the same" — safe, genre-locked picks — and under-value songs that are good near-matches on mood/energy but sit outside the favorite genre.
+
+
 
 ---
 
@@ -69,12 +71,26 @@ You can add more tests in `tests/test_recommender.py`.
 Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
 
 ```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+Loading songs from data/songs.csv...
+Loaded songs: 18
+
+Top recommendations:
+
+1. Sunrise City by Neon Echo — Score: 3.98
+   Because: genre match (+2.0), mood match (+1.0), energy similarity (+0.98)
+
+2. Gym Hero by Max Pulse — Score: 2.87
+   Because: genre match (+2.0), energy similarity (+0.87)
+
+3. Rooftop Lights by Indigo Parade — Score: 1.96
+   Because: mood match (+1.0), energy similarity (+0.96)
+
+4. Concrete Dreams by Vertex Flow — Score: 1.00
+   Because: energy similarity (+1.00)
+
+5. Night Drive Loop by Neon Echo — Score: 0.95
+   Because: energy similarity (+0.95)
+   
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
