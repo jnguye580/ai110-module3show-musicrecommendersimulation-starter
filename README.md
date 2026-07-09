@@ -19,15 +19,13 @@ Replace this paragraph with your own summary of what your version does.
 
 Explain your design in plain language.
 
+
+
 Some prompts to answer:
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+  In the design of my system, I have Categorical features and Numerical features. The Categorical features are used to award match bonuses for genre and mood, while the Numerical features (energy, tempo_bpm, valence, danceability, and acousticness) are used to score how close a song is to the user's target values. Every song is scored this way and then ranked highest to lowest. Each `UserProfile` stores what genre, mood, energy level, etc. that specific user typically likes, and every song is compared directly against that one profile's stated preferences. This is a **content-based filtering** approach — it recommends songs based on their own features matching what the user says they like, not based on what other similar users enjoyed.
 
-You can include a simple diagram or bullet list if helpful.
+  **Possible future extension (not implemented here):** a *collaborative filtering* approach, where instead of comparing songs to one profile's preferences, the system would compare multiple profiles to each other, find users with similar taste, and recommend songs that those similar users liked. This would require storing multiple `UserProfile`s with real preference/listening data and a similarity metric between profiles, which is a separate system from the one built here.
 
 ---
 
