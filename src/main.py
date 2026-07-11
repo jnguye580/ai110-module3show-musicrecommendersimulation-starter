@@ -19,16 +19,22 @@ def main() -> None:
     songs = load_songs("data/songs.csv")
     print(f"Loaded songs: {len(songs)}")
 
-    # Starter example profile
-    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
+    # Sample user preference profiles
+    profiles = {
+        "High-Energy Pop": {"genre": "pop", "mood": "happy", "energy": 0.85},
+        "Chill Lofi": {"genre": "lofi", "mood": "chill", "energy": 0.35, "likes_acoustic": True},
+        "Deep Intense Rock": {"genre": "rock", "mood": "intense", "energy": 0.9},
+    }
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+    for profile_name, user_prefs in profiles.items():
+        recommendations = recommend_songs(user_prefs, songs, k=5)
 
-    print("\nTop recommendations:\n")
-    for rank, (song, score, explanation) in enumerate(recommendations, start=1):
-        print(f"{rank}. {song['title']} by {song['artist']} — Score: {score:.2f}")
-        print(f"   Because: {explanation}")
-        print()
+        print(f"\n=== {profile_name} ===")
+        print("Top recommendations:\n")
+        for rank, (song, score, explanation) in enumerate(recommendations, start=1):
+            print(f"{rank}. {song['title']} by {song['artist']} — Score: {score:.2f}")
+            print(f"   Because: {explanation}")
+            print()
 
 
 if __name__ == "__main__":
